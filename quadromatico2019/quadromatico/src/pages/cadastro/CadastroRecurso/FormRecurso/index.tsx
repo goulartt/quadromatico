@@ -1,19 +1,19 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
+import Recurso from 'interfaces/entity/recurso';
+import { FieldLabel, ButtonLabel } from 'constants/labels';
+import { ErrorMessage } from 'constants/messages';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import PersonIcon from '@material-ui/icons/Person';
-import AddIcon from '@material-ui/icons/Add';
-import Typography from '@material-ui/core/Typography';
+import { Formik, FormikProps } from 'formik';
 import { blue } from '@material-ui/core/colors';
+import * as yup from 'yup';
+import { TextField, Button } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 
-const emails = ['username@gmail.com', 'user02@gmail.com'];
 const useStyles = makeStyles({
   avatar: {
     backgroundColor: blue[100],
@@ -30,6 +30,16 @@ interface FormRecursoProps {
 export default function FormRecurso(props: FormRecursoProps) {
   const classes = useStyles();
   const { onClose, selectedValue, open } = props;
+  const formValues: Recurso = {
+    codigo: '',
+    descricao: '',
+    isEspacoFisico: false,
+  };
+
+  const validationSchema = yup.object({
+    codigo: yup.string().required(ErrorMessage.CODIGO_VAZIO),
+    descricao: yup.string().required(ErrorMessage.DESCRICAO_VAZIA),
+  });
 
   function handleClose() {
     onClose(selectedValue);
@@ -41,28 +51,81 @@ export default function FormRecurso(props: FormRecursoProps) {
 
   return (
     <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-      <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
-      <List>
-        {emails.map(email => (
-          <ListItem button onClick={() => handleListItemClick(email)} key={email}>
-            <ListItemAvatar>
-              <Avatar className={classes.avatar}>
-                <PersonIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={email} />
-          </ListItem>
-        ))}
-        <ListItem button onClick={() => handleListItemClick('addAccount')}>
-          <ListItemAvatar>
-            <Avatar>
-              <AddIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="add account" />
-        </ListItem>
-      </List>
+      <DialogTitle id="simple-dialog-title">Formulário de Recursos</DialogTitle>
+
+      <Formik
+        onSubmit={() => { }}
+        render={props => <Form {...props} />}
+        initialValues={formValues}
+        validationSchema={validationSchema}
+      />
+
     </Dialog>
+  );
+}
+
+function Form(props: FormikProps<Recurso>) {
+  const {
+    errors,
+    touched,
+    handleSubmit,
+    handleChange,
+    setFieldTouched,
+  } = props;
+
+  const onChange = (name: keyof Recurso, e: React.ChangeEvent) => {
+    e.persist();
+    handleChange(e);
+  };
+
+  const onBlur = (name: keyof Recurso) => {
+    setFieldTouched(name, true, true);
+  };
+
+  return (
+    <div>
+      <form style={{ padding: 20 }} className="" onSubmit={handleSubmit}>
+
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              helperText={touched.codigo ? errors.codigo : ''}
+              error={touched.codigo && !!errors.codigo}
+              onChange={e => onChange('codigo', e)}
+              onBlur={() => onBlur('codigo')}
+              margin="normal"
+              name="codigo"
+              fullWidth
+              label={FieldLabel.CODIGO}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              margin="normal"
+              helperText={touched.descricao ? errors.descricao : ''}
+              error={touched.descricao && !!errors.descricao}
+              onChange={e => onChange('descricao', e)}
+              name="descricao"
+              label={FieldLabel.DESCRICAO}
+              fullWidth
+            />
+          </Grid>
+          
+          <Grid item xs={12}>
+            <FormControlLabel
+              control={<Checkbox color="secondary" name="isEspacoFisico" value="yes" />}
+              label={FieldLabel.ESPACO_FISICO}
+            />
+          </Grid>
+          <Button type="submit" variant="contained" color="primary" className="">
+            {ButtonLabel.SALVAR}
+          </Button>
+        </Grid>
+
+      </form>
+    </div>
   );
 }
 

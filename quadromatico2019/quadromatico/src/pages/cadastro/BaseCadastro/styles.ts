@@ -11,8 +11,7 @@ const useStyles = makeStyles(theme => ({
   },
   paperTitleContainer: {
     width: '100%',
-    height: '40px',
-    borderBottom: '1px #e3e1e1 solid',
+    height: '40px'
   },
   paperTitle: {
     margin: '8px 0 0 8px',
