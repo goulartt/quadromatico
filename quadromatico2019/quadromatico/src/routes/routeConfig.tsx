@@ -44,7 +44,7 @@ const routes: RouteConfig[] = [
   },
   {
     id: 5,
-    title: 'Diciplina',
+    title: 'Disciplina',
     parentId: 2,
     path: '/disciplina',
     componentType: 'CadastroDisciplina',

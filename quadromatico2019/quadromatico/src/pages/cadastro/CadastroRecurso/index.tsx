@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import * as yup from 'yup';
 import useStyles from './styles';
 import BaseCadastro from '../BaseCadastro';
@@ -9,6 +9,8 @@ import { FieldLabel, ButtonLabel } from 'constants/labels';
 import { ErrorMessage } from 'constants/messages';
 
 const CadastroRecurso = () => {
+  const classes = useStyles();
+
   const validationSchema = yup.object({
     codigo: yup.string().required(ErrorMessage.CODIGO_VAZIO),
     descricao: yup.string().required(ErrorMessage.DESCRICAO_VAZIA),
@@ -21,19 +23,25 @@ const CadastroRecurso = () => {
   };
 
   return (
-    <BaseCadastro
-      title="Cadastro de recursos"
-      onSubmit={() => {}}
-      formComponent={Form}
-      formValues={formValues}
-      validationSchema={validationSchema}
-    />
+    <BaseCadastro title="Cadastro de recursos">
+      <Formik
+        onSubmit={() => {}}
+        render={props => <Form {...props} />}
+        initialValues={formValues}
+        validationSchema={validationSchema}
+      />
+    </BaseCadastro>
   );
 };
 
-const Form: FunctionComponent<FormikProps<Recurso>> = props => {
-  const { errors, touched, handleSubmit, handleChange, setFieldTouched } = props;
-  const classes = useStyles();
+function Form(props: FormikProps<Recurso>) {
+  const {
+    errors,
+    touched,
+    handleSubmit,
+    handleChange,
+    setFieldTouched,
+  } = props;
 
   const onChange = (name: keyof Recurso, e: React.ChangeEvent) => {
     e.persist();
@@ -45,31 +53,34 @@ const Form: FunctionComponent<FormikProps<Recurso>> = props => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField
-        variant="outlined"
-        helperText={touched.codigo ? errors.codigo : ''}
-        error={touched.codigo && !!errors.codigo}
-        onChange={e => onChange('codigo', e)}
-        onBlur={() => onBlur('codigo')}
-        margin="normal"
-        name="codigo"
-        label={FieldLabel.CODIGO + '*'}
-      />
-      <TextField
-        variant="outlined"
-        margin="normal"
-        helperText={touched.descricao ? errors.descricao : ''}
-        error={touched.descricao && !!errors.descricao}
-        onChange={e => onChange('descricao', e)}
-        onBlur={() => onBlur('descricao')}
-        name="descricao"
-        label={FieldLabel.DESCRICAO}
-      />
+    <div>
+      <form className="" onSubmit={handleSubmit}>
+        <TextField
+          variant="outlined"
+          helperText={touched.codigo ? errors.codigo : ''}
+          error={touched.codigo && !!errors.codigo}
+          onChange={e => onChange('codigo', e)}
+          onBlur={() => onBlur('codigo')}
+          margin="normal"
+          name="codigo"
+          label={FieldLabel.CODIGO + '*'}
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          helperText={touched.descricao ? errors.descricao : ''}
+          error={touched.descricao && !!errors.descricao}
+          onChange={e => onChange('descricao', e)}
+          name="descricao"
+          label={FieldLabel.DESCRICAO}
+        />
 
-      {props.children}
-    </form>
+        <Button type="submit" variant="contained" color="primary" className="">
+          {ButtonLabel.SALVAR}
+        </Button>
+      </form>
+    </div>
   );
-};
+}
 
 export default CadastroRecurso;
