@@ -13,4 +13,5 @@ export enum FieldLabel {
 export enum ButtonLabel {
   ENTRAR = 'Entrar',
   SALVAR = 'Salvar',
+  NOVO = 'Novo'
 }

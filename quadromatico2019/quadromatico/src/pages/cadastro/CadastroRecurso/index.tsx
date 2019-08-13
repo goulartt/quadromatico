@@ -7,6 +7,8 @@ import Recurso from 'interfaces/entity/recurso';
 import { Button, TextField } from '@material-ui/core';
 import { FieldLabel, ButtonLabel } from 'constants/labels';
 import { ErrorMessage } from 'constants/messages';
+import TabelaRecurso from './TabelaRecurso';
+import FormRecurso from './FormRecurso';
 
 const CadastroRecurso = () => {
   const classes = useStyles();
@@ -22,14 +24,33 @@ const CadastroRecurso = () => {
     isEspacoFisico: false,
   };
 
+  const [open, setOpen] = React.useState(false);
+  const [selectedValue, setSelectedValue] = React.useState('');
+
+  function handleClickOpen() {
+    setOpen(true);
+  }
+
+  const handleClose = (value: string) => {
+    setOpen(false);
+    setSelectedValue(value);
+  };
+
+
   return (
     <BaseCadastro title="Cadastro de recursos">
       <Formik
-        onSubmit={() => {}}
+        onSubmit={() => { }}
         render={props => <Form {...props} />}
         initialValues={formValues}
         validationSchema={validationSchema}
       />
+      <Button type="submit" variant="contained" onClick={handleClickOpen} color="primary" className="">
+        {ButtonLabel.NOVO}
+      </Button>
+      <TabelaRecurso ></TabelaRecurso>
+      <FormRecurso selectedValue={selectedValue} open={open} onClose={handleClose} />
+
     </BaseCadastro>
   );
 };
