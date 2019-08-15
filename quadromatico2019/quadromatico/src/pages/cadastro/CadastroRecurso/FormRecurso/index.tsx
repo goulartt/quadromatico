@@ -10,7 +10,6 @@ import { blue } from '@material-ui/core/colors';
 import * as yup from 'yup';
 import { TextField, Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
@@ -28,7 +27,6 @@ interface FormRecursoProps {
 }
 
 export default function FormRecurso(props: FormRecursoProps) {
-  const classes = useStyles();
   const { onClose, selectedValue, open } = props;
   const formValues: Recurso = {
     codigo: '',

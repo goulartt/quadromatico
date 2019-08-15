@@ -13,6 +13,19 @@ const reducer: Reducer<RecursoState> = (state = INITIAL_STATE, action) => {
       return { ...state, modo: 'create' };
     case RecursoTypes.CANCELAR_CADASTRO:
       return { ...state, modo: 'list' };
+    case RecursoTypes.OBTER_REQUEST:
+      return { ...state, modo: 'list' };
+    case RecursoTypes.OBTER_SUCCESS:
+      return {
+        ...state,
+        listaRecursos: action.payload,
+        modo: 'list'
+      };
+    case RecursoTypes.OBTER_FAILURE:
+      return {
+        ...state,
+        modo: 'list'
+      };
     case RecursoTypes.CANCELAR_EDICAO:
       return { ...state, modo: 'list' };
     case RecursoTypes.EDITAR:

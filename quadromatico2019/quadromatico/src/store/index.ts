@@ -8,12 +8,14 @@ import { AuthState } from 'store/auth/types';
 import rootReducer from 'store/rootReducer';
 import rootSaga from 'store/rootSaga';
 import { CalendarioState } from './calendario/types';
+import { RecursoState } from './cadastro/recurso/types';
 
 export interface ApplicationState {
   auth: AuthState;
   curso: CursoState;
   calendario: CalendarioState;
   horario: HorarioState;
+  recurso: RecursoState;
 }
 
 const middlewares = [];

@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import useStyles from './styles';
 import BaseCadastro from '../BaseCadastro';
 import { Button, TextField } from '@material-ui/core';
 import { ButtonLabel } from 'constants/labels';
 import TabelaRecurso from './TabelaRecurso';
 import FormRecurso from './FormRecurso';
+import Recurso from 'interfaces/entity/recurso';
+
 
 const CadastroRecurso = () => {
   const classes = useStyles();
 
 
 
-  const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState('');
+  const [open, setOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState('');
+
 
   function handleClickOpen() {
     setOpen(true);

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,6 +7,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { obterRecursosRequest } from '../../../../store/cadastro/recurso/actions';
+import { ApplicationState } from 'store';
+import { useDispatch, useSelector } from 'react-redux';
+import Cancel from '@material-ui/icons/Cancel';
+import Edit from '@material-ui/icons/Edit';
 
 const StyledTableCell = withStyles(theme => ({
     head: {
@@ -27,17 +32,6 @@ const StyledTableRow = withStyles(theme => ({
 }))(TableRow);
 
 
-function createData(codigo: any, descricao: any, curso: any, espacoFisico: any) {
-    return { codigo, descricao, curso, espacoFisico };
-}
-
-const rows = [
-    createData(1, 'Recurso 1', 'Curso 1', 'S'),
-    createData(2, 'Recurso 2', 'Curso 1', 'S'),
-    createData(3, 'Recurso 3', 'Curso 1', 'S'),
-    createData(4, 'Recurso 4', 'Curso 1', 'S'),
-    createData(5, 'Recurso 5', 'Curso 1', 'S'),
-];
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -51,6 +45,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function TabelaRecurso() {
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        dispatch(obterRecursosRequest());
+
+    }, []);
+    const recursos = useSelector(
+        ({ recurso: { listaRecursos } }: ApplicationState) => listaRecursos
+    );
     const classes = useStyles();
 
     return (
@@ -60,19 +64,24 @@ export default function TabelaRecurso() {
                     <TableRow>
                         <StyledTableCell>Código</StyledTableCell>
                         <StyledTableCell align="right">Descrição</StyledTableCell>
-                        <StyledTableCell align="right">Curso</StyledTableCell>
                         <StyledTableCell align="right">Espaço Físico</StyledTableCell>
+                        <StyledTableCell align="right">Ações</StyledTableCell>
+
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map(row => (
-                        <StyledTableRow key={row.codigo}>
+                    {recursos.map(row => (
+                        <StyledTableRow key={row.id}>
                             <StyledTableCell component="th" scope="row">
                                 {row.codigo}
                             </StyledTableCell>
                             <StyledTableCell align="right">{row.descricao}</StyledTableCell>
-                            <StyledTableCell align="right">{row.curso}</StyledTableCell>
-                            <StyledTableCell align="right">{row.espacoFisico}</StyledTableCell>
+                            <StyledTableCell align="right">{row.isEspacoFisico ? 'S' : 'N'}</StyledTableCell>
+                            <StyledTableCell align="right">
+                                <Edit />
+                                <Cancel />
+                            </StyledTableCell>
+
                         </StyledTableRow>
                     ))}
                 </TableBody>
