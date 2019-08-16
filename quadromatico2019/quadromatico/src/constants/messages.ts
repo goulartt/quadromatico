@@ -7,4 +7,5 @@ export enum ErrorMessage {
   LOGIN_SENHA_INCORRETOS = 'Login ou senha incorretos',
   CODIGO_VAZIO = 'Por favor, insira o código',
   DESCRICAO_VAZIA = 'Por favor, insira a descrição.',
+  NOME_VAZIO = 'Por favor, insira o nome.'
 }

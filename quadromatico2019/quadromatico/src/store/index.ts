@@ -9,6 +9,11 @@ import rootReducer from 'store/rootReducer';
 import rootSaga from 'store/rootSaga';
 import { CalendarioState } from './calendario/types';
 import { RecursoState } from './cadastro/recurso/types';
+import { DisciplinaState } from './cadastro/disciplina/types';
+import { TurmaState } from './cadastro/turma/types';
+import { ProfessorState } from './cadastro/professor/types';
+import { AulaState } from './cadastro/aula/types';
+import { UsuarioState } from './cadastro/usuario/types';
 
 export interface ApplicationState {
   auth: AuthState;
@@ -16,6 +21,11 @@ export interface ApplicationState {
   calendario: CalendarioState;
   horario: HorarioState;
   recurso: RecursoState;
+  disciplina: DisciplinaState;
+  turma: TurmaState;
+  professor: ProfessorState;
+  aula: AulaState;
+  usuario: UsuarioState;
 }
 
 const middlewares = [];

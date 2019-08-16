@@ -8,6 +8,7 @@ export enum FieldLabel {
   CODIGO = 'Código',
   DESCRICAO = 'Descrição',
   ESPACO_FISICO = 'É espaço físico?',
+  NOME = 'Nome'
 }
 
 export enum ButtonLabel {

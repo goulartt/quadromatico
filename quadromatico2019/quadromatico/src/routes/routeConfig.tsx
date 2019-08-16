@@ -2,6 +2,10 @@ import React, { ComponentClass, FunctionComponent } from 'react';
 import Calendario from 'pages/Calendario';
 import CadastroRecurso from 'pages/cadastro/CadastroRecurso';
 import CadastroDisciplina from 'pages/cadastro/CadastroDisciplina';
+import CadastroTurma from 'pages/cadastro/CadastroTurma';
+import CadastroProfessor from 'pages/cadastro/CadastroProfessor';
+import CadastroAula from 'pages/cadastro/CadastroAula';
+import CadastroUsuario from 'pages/cadastro/CadastroUsuario';
 
 import Private from './private';
 
@@ -12,6 +16,10 @@ const componentes: { [nome: string]: ComponentClass | FunctionComponent } = {
   Calendario,
   CadastroRecurso,
   CadastroDisciplina,
+  CadastroTurma,
+  CadastroProfessor,
+  CadastroAula,
+  CadastroUsuario,
 };
 
 const routes: RouteConfig[] = [
@@ -48,6 +56,34 @@ const routes: RouteConfig[] = [
     parentId: 2,
     path: '/disciplina',
     componentType: 'CadastroDisciplina',
+  },
+  {
+    id: 6,
+    title: 'Turma',
+    parentId: 2,
+    path: '/turma',
+    componentType: 'CadastroTurma',
+  },
+  {
+    id: 7,
+    title: 'Professor',
+    parentId: 2,
+    path: '/professor',
+    componentType: 'CadastroProfessor',
+  },
+  {
+    id: 8,
+    title: 'Aula',
+    parentId: 2,
+    path: '/aula',
+    componentType: 'CadastroAula',
+  },
+  {
+    id: 9,
+    title: 'Usuário',
+    parentId: 2,
+    path: '/usuario',
+    componentType: 'CadastroUsuario',
   },
 ];
 

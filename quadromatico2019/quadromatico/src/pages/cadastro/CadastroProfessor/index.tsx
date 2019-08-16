@@ -3,12 +3,12 @@ import useStyles from './styles';
 import BaseCadastro from '../BaseCadastro';
 import { Button, TextField } from '@material-ui/core';
 import { ButtonLabel } from 'constants/labels';
-import TabelaDisciplina from './TabelaDisciplina';
-import FormDisciplina from './FormDisciplina';
-import Recurso from 'interfaces/entity/recurso';
+import TabelaProfessor from './TabelaProfessor';
+import FormDisciplina from './FormProfessor';
+import FormProfessor from 'interfaces/entity/recurso';
 
 
-const CadastroDisciplina = () => {
+const CadastroProfessor = () => {
   const classes = useStyles();
 
 
@@ -28,12 +28,12 @@ const CadastroDisciplina = () => {
 
 
   return (
-    <BaseCadastro title="Cadastro de Disciplinas">
+    <BaseCadastro title="Cadastro de Turmas">
       <Button type="submit" variant="contained" onClick={handleClickOpen} className="">
         {ButtonLabel.NOVO}
       </Button>
-      <TabelaDisciplina ></TabelaDisciplina>
-      <FormDisciplina selectedValue={selectedValue} open={open} onClose={handleClose} />
+      <TabelaProfessor ></TabelaProfessor>
+      <FormProfessor selectedValue={selectedValue} open={open} onClose={handleClose} />
 
     </BaseCadastro>
   );
@@ -41,4 +41,4 @@ const CadastroDisciplina = () => {
 
 
 
-export default CadastroDisciplina;
+export default CadastroProfessor;
