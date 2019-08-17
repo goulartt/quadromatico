@@ -52,9 +52,9 @@ export default function TabelaProfessor() {
         dispatch(obterProfessoresRequest());
 
     }, []);
-    
+
     const Professors = useSelector(
-        ({ Professor: { listaProfessors } }: ApplicationState) => listaProfessors
+        ({ professor: { listaProfessors } }: ApplicationState) => listaProfessors
     );
     const classes = useStyles();
 
@@ -76,7 +76,7 @@ export default function TabelaProfessor() {
                                 {row.id}
                             </StyledTableCell>
                             <StyledTableCell align="right">{row.nome}</StyledTableCell>
-                           
+
                             <StyledTableCell align="right">
                                 <Edit />
                                 <Cancel />

@@ -4,8 +4,7 @@ import BaseCadastro from '../BaseCadastro';
 import { Button, TextField } from '@material-ui/core';
 import { ButtonLabel } from 'constants/labels';
 import TabelaTurma from './TabelaTurma';
-import FormDisciplina from './FormTurma';
-import FormTurma from 'interfaces/entity/recurso';
+import FormTurma from './FormTurma';
 
 
 const CadastroTurma = () => {

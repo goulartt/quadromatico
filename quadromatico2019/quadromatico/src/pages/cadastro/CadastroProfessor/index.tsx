@@ -4,8 +4,7 @@ import BaseCadastro from '../BaseCadastro';
 import { Button, TextField } from '@material-ui/core';
 import { ButtonLabel } from 'constants/labels';
 import TabelaProfessor from './TabelaProfessor';
-import FormDisciplina from './FormProfessor';
-import FormProfessor from 'interfaces/entity/recurso';
+import FormProfessor from './FormProfessor';
 
 
 const CadastroProfessor = () => {

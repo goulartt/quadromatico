@@ -52,7 +52,7 @@ export default function TabelaTurma() {
         dispatch(obterTurmasRequest());
 
     }, []);
-    
+
     const turmas = useSelector(
         ({ turma: { listaTurmas } }: ApplicationState) => listaTurmas
     );
@@ -70,20 +70,20 @@ export default function TabelaTurma() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {turmas.map(row => (
+                    {/*turmas.map(row => (
                         <StyledTableRow key={row.id}>
                             <StyledTableCell component="th" scope="row">
                                 {row.id}
                             </StyledTableCell>
                             <StyledTableCell align="right">{row.nome}</StyledTableCell>
-                           
+
                             <StyledTableCell align="right">
                                 <Edit />
                                 <Cancel />
                             </StyledTableCell>
 
                         </StyledTableRow>
-                    ))}
+                    ))*/}
                 </TableBody>
             </Table>
         </Paper>

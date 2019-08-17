@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import Professor from '../../../interfaces/entity/Professor';
+import Professor from '../../../interfaces/entity/professor';
 import api from 'services/api';
 import { obterProfessoresFailure, obterProfessoresSuccess } from './actions';
 

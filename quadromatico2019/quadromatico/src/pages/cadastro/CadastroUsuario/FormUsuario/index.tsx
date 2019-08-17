@@ -29,11 +29,11 @@ interface FormUsuarioProps {
 export default function FormUsuario(props: FormUsuarioProps) {
   const { onClose, selectedValue, open } = props;
   const formValues: Usuario = {
-    nome: ''
+    login: '',
   };
 
   const validationSchema = yup.object({
-    nome: yup.string().required(ErrorMessage.NOME_VAZIO),
+    login: yup.string().required(ErrorMessage.NOME_VAZIO),
   });
 
   function handleClose() {
@@ -86,10 +86,10 @@ function Form(props: FormikProps<Usuario>) {
             <TextField
               required
               margin="normal"
-              helperText={touched.nome ? errors.nome : ''}
-              error={touched.nome && !!errors.nome}
-              onChange={e => onChange('nome', e)}
-              name="nome"
+              helperText={touched.login ? errors.login : ''}
+              error={touched.login && !!errors.login}
+              onChange={e => onChange('login', e)}
+              name="login"
               label={FieldLabel.NOME}
               fullWidth
             />

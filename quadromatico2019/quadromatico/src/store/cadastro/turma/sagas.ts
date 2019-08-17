@@ -3,7 +3,7 @@ import Turma from '../../../interfaces/entity/turma';
 import api from 'services/api';
 import { obterTurmasFailure, obterTurmasSuccess } from './actions';
 
-export function* obterTurmas() {
+export function obterTurmas() {
    /* try {
         //const response = yield call(api.post, '/api/Turmas/getTurmas');
 
@@ -30,7 +30,7 @@ export function* obterTurmas() {
                     termino: 'Aa',
                     terminoIntervalo: 'Aa'
                 }
-                
+
             }
         ];
         yield put(obterTurmasSuccess(Turmas));

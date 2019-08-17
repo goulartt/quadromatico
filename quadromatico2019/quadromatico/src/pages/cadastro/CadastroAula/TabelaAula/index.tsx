@@ -52,9 +52,9 @@ export default function TabelaAula() {
         dispatch(obterAulasRequest());
 
     }, []);
-    
+
     const Aulas = useSelector(
-        ({ Aula: { listaAulas } }: ApplicationState) => listaAulas
+        ({ aula: { listaAulas } }: ApplicationState) => listaAulas
     );
     const classes = useStyles();
 
@@ -70,20 +70,20 @@ export default function TabelaAula() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {Aulas.map(row => (
+                    {/*Aulas.map(row => (
                         <StyledTableRow key={row.id}>
                             <StyledTableCell component="th" scope="row">
                                 {row.id}
                             </StyledTableCell>
                             <StyledTableCell align="right">{row.nome}</StyledTableCell>
-                           
+
                             <StyledTableCell align="right">
                                 <Edit />
                                 <Cancel />
                             </StyledTableCell>
 
                         </StyledTableRow>
-                    ))}
+                    ))*/}
                 </TableBody>
             </Table>
         </Paper>

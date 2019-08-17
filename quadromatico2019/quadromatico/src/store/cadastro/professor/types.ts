@@ -1,4 +1,4 @@
-import Professor from 'interfaces/entity/Professor';
+import Professor from 'interfaces/entity/professor';
 import ModoCadastro from 'interfaces/common/modo-cadastro';
 import CadastroState from 'interfaces/common/cadastro';
 

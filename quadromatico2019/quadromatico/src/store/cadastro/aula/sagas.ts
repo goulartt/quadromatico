@@ -3,8 +3,8 @@ import Aula from '../../../interfaces/entity/aula';
 import api from 'services/api';
 import { obterAulasFailure, obterAulasSuccess } from './actions';
 
-export function* obterAulas() {
-    try {
+export function obterAulas() {
+    /*try {
         //const response = yield call(api.post, '/api/Aulas/getAulas');
 
         let Aulas: Aula[] = [
@@ -22,5 +22,5 @@ export function* obterAulas() {
         yield put(obterAulasSuccess(Aulas));
     } catch (err) {
         yield put(obterAulasFailure());
-    }
+    }*/
 }
