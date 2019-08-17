@@ -64,18 +64,22 @@ export default function TabelaAula() {
                 <TableHead>
                     <TableRow>
                         <StyledTableCell>Código</StyledTableCell>
-                        <StyledTableCell align="right">Nome</StyledTableCell>
+                        <StyledTableCell align="right">Hora Inicio</StyledTableCell>
+                        <StyledTableCell align="right">Hora Terminio</StyledTableCell>
+
                         <StyledTableCell align="right">Ações</StyledTableCell>
 
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {/*Aulas.map(row => (
+                    {Aulas.map(row => (
                         <StyledTableRow key={row.id}>
                             <StyledTableCell component="th" scope="row">
                                 {row.id}
                             </StyledTableCell>
-                            <StyledTableCell align="right">{row.nome}</StyledTableCell>
+
+                            <StyledTableCell align="right">{row.horaInicioAula}</StyledTableCell>
+                            <StyledTableCell align="right">{row.horaTerminoAula}</StyledTableCell>
 
                             <StyledTableCell align="right">
                                 <Edit />
@@ -83,7 +87,7 @@ export default function TabelaAula() {
                             </StyledTableCell>
 
                         </StyledTableRow>
-                    ))*/}
+                    ))}
                 </TableBody>
             </Table>
         </Paper>

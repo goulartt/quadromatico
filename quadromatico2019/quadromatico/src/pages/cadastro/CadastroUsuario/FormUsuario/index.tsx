@@ -46,7 +46,7 @@ export default function FormUsuario(props: FormUsuarioProps) {
 
   return (
     <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-      <DialogTitle id="simple-dialog-title">Formulário de Usuarios</DialogTitle>
+      <DialogTitle id="simple-dialog-title">Formulário de Usuários</DialogTitle>
 
       <Formik
         onSubmit={() => { }}
@@ -82,7 +82,7 @@ function Form(props: FormikProps<Usuario>) {
       <form style={{ padding: 20 }} className="" onSubmit={handleSubmit}>
 
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12}>
             <TextField
               required
               margin="normal"

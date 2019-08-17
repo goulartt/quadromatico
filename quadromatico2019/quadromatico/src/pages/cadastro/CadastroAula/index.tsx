@@ -7,7 +7,7 @@ import TabelaAula from './TabelaAula';
 import FormAula from './FormAula';
 
 
-const CadastroProfessor = () => {
+const CadastroAula = () => {
   const classes = useStyles();
 
 
@@ -27,7 +27,7 @@ const CadastroProfessor = () => {
 
 
   return (
-    <BaseCadastro title="Cadastro de Turmas">
+    <BaseCadastro title="Cadastro de Aula">
       <Button type="submit" variant="contained" onClick={handleClickOpen} className="">
         {ButtonLabel.NOVO}
       </Button>
@@ -40,4 +40,4 @@ const CadastroProfessor = () => {
 
 
 
-export default CadastroProfessor;
+export default CadastroAula;

@@ -27,7 +27,7 @@ const CadastroProfessor = () => {
 
 
   return (
-    <BaseCadastro title="Cadastro de Turmas">
+    <BaseCadastro title="Cadastro de Professores">
       <Button type="submit" variant="contained" onClick={handleClickOpen} className="">
         {ButtonLabel.NOVO}
       </Button>

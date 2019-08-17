@@ -85,7 +85,7 @@ function Form(props: FormikProps<Recurso>) {
       <form style={{ padding: 20 }} className="" onSubmit={handleSubmit}>
 
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12}>
             <TextField
               required
               helperText={touched.codigo ? errors.codigo : ''}
@@ -98,7 +98,7 @@ function Form(props: FormikProps<Recurso>) {
               label={FieldLabel.CODIGO}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12}>
             <TextField
               required
               margin="normal"
@@ -110,7 +110,7 @@ function Form(props: FormikProps<Recurso>) {
               fullWidth
             />
           </Grid>
-          
+
           <Grid item xs={12}>
             <FormControlLabel
               control={<Checkbox color="secondary" name="isEspacoFisico" value="yes" />}

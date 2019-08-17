@@ -64,7 +64,7 @@ export default function TabelaUsuario() {
                 <TableHead>
                     <TableRow>
                         <StyledTableCell>Código</StyledTableCell>
-                        <StyledTableCell align="right">Nome</StyledTableCell>
+                        <StyledTableCell align="right">Login</StyledTableCell>
                         <StyledTableCell align="right">Ações</StyledTableCell>
 
                     </TableRow>
