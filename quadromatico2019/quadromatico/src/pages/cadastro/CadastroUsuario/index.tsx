@@ -27,7 +27,11 @@ const CadastroUsuario = () => {
 
 
   return (
+<<<<<<< HEAD
     <BaseCadastro handleClick={handleClickOpen} title="Cadastro de Usuário">
+=======
+    <BaseCadastro title="Cadastro de Usuário">
+>>>>>>> 531a19ed8772324361e0790bf6d601e11d1d1e0f
       <Button type="submit" variant="contained" onClick={handleClickOpen} className="">
         {ButtonLabel.NOVO}
       </Button>
