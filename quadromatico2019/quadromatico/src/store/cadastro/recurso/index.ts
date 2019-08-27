@@ -26,6 +26,14 @@ const reducer: Reducer<RecursoState> = (state = INITIAL_STATE, action) => {
         ...state,
         modo: 'list'
       };
+
+    case RecursoTypes.INATIVAR: 
+  
+      return {
+        ...state,
+        modo: 'list'
+
+      };
     case RecursoTypes.CANCELAR_EDICAO:
       return { ...state, modo: 'list' };
     case RecursoTypes.EDITAR:

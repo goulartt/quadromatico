@@ -28,3 +28,7 @@ export function* obterRequests() {
         yield put(obterRecursosFailure());
     }
 }
+
+export function* inativarRecurso() {
+    yield console.log('To DO');
+}

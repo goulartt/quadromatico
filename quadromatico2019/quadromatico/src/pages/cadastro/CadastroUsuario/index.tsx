@@ -7,7 +7,7 @@ import TabelaUsuario from './TabelaUsuario';
 import FormUsuario from './FormUsuario';
 
 
-const CadastroTurma = () => {
+const CadastroUsuario = () => {
   const classes = useStyles();
 
 
@@ -27,7 +27,7 @@ const CadastroTurma = () => {
 
 
   return (
-    <BaseCadastro title="Cadastro de Disciplinas">
+    <BaseCadastro handleClick={handleClickOpen} title="Cadastro de Usuário">
       <Button type="submit" variant="contained" onClick={handleClickOpen} className="">
         {ButtonLabel.NOVO}
       </Button>
@@ -40,4 +40,4 @@ const CadastroTurma = () => {
 
 
 
-export default CadastroTurma;
+export default CadastroUsuario;

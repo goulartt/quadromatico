@@ -1,4 +1,4 @@
-import Usuario from 'interfaces/entity/Usuario';
+import Usuario from 'interfaces/entity/usuario';
 import ModoCadastro from 'interfaces/common/modo-cadastro';
 import CadastroState from 'interfaces/common/cadastro';
 

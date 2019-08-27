@@ -28,7 +28,7 @@ const CadastroDisciplina = () => {
 
 
   return (
-    <BaseCadastro title="Cadastro de Disciplinas">
+    <BaseCadastro handleClick={handleClickOpen} title="Cadastro de Disciplinas">
       <Button type="submit" variant="contained" onClick={handleClickOpen} className="">
         {ButtonLabel.NOVO}
       </Button>

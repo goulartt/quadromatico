@@ -4,8 +4,7 @@ import BaseCadastro from '../BaseCadastro';
 import { Button, TextField } from '@material-ui/core';
 import { ButtonLabel } from 'constants/labels';
 import TabelaProfessor from './TabelaProfessor';
-import FormDisciplina from './FormProfessor';
-import FormProfessor from 'interfaces/entity/recurso';
+import FormProfessor from './FormProfessor';
 
 
 const CadastroProfessor = () => {
@@ -28,7 +27,7 @@ const CadastroProfessor = () => {
 
 
   return (
-    <BaseCadastro title="Cadastro de Turmas">
+    <BaseCadastro handleClick={handleClickOpen} title="Cadastro de Professores">
       <Button type="submit" variant="contained" onClick={handleClickOpen} className="">
         {ButtonLabel.NOVO}
       </Button>

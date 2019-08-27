@@ -52,9 +52,9 @@ export default function TabelaAula() {
         dispatch(obterAulasRequest());
 
     }, []);
-    
+
     const Aulas = useSelector(
-        ({ Aula: { listaAulas } }: ApplicationState) => listaAulas
+        ({ aula: { listaAulas } }: ApplicationState) => listaAulas
     );
     const classes = useStyles();
 
@@ -64,7 +64,9 @@ export default function TabelaAula() {
                 <TableHead>
                     <TableRow>
                         <StyledTableCell>Código</StyledTableCell>
-                        <StyledTableCell align="right">Nome</StyledTableCell>
+                        <StyledTableCell align="right">Hora Inicio</StyledTableCell>
+                        <StyledTableCell align="right">Hora Terminio</StyledTableCell>
+
                         <StyledTableCell align="right">Ações</StyledTableCell>
 
                     </TableRow>
@@ -75,8 +77,10 @@ export default function TabelaAula() {
                             <StyledTableCell component="th" scope="row">
                                 {row.id}
                             </StyledTableCell>
-                            <StyledTableCell align="right">{row.nome}</StyledTableCell>
-                           
+
+                            <StyledTableCell align="right">{row.horaInicioAula}</StyledTableCell>
+                            <StyledTableCell align="right">{row.horaTerminoAula}</StyledTableCell>
+
                             <StyledTableCell align="right">
                                 <Edit />
                                 <Cancel />

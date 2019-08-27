@@ -22,16 +22,16 @@ const useStyles = makeStyles({
 
 interface FormRecursoProps {
   open: boolean;
-  selectedValue: string;
-  onClose: (value: string) => void;
+  selectedValue: Recurso | undefined;
+  onClose: (value: Recurso | undefined) => void;
 }
 
 export default function FormRecurso(props: FormRecursoProps) {
   const { onClose, selectedValue, open } = props;
   const formValues: Recurso = {
-    codigo: '',
-    descricao: '',
-    isEspacoFisico: false,
+    codigo: selectedValue ? selectedValue.codigo : '',
+    descricao: selectedValue ? selectedValue.descricao : '',
+    isEspacoFisico: selectedValue ? selectedValue.isEspacoFisico : false,
   };
 
   const validationSchema = yup.object({
@@ -43,7 +43,7 @@ export default function FormRecurso(props: FormRecursoProps) {
     onClose(selectedValue);
   }
 
-  function handleListItemClick(value: string) {
+  function handleListItemClick(value: Recurso) {
     onClose(value);
   }
 
@@ -52,7 +52,7 @@ export default function FormRecurso(props: FormRecursoProps) {
       <DialogTitle id="simple-dialog-title">Formulário de Recursos</DialogTitle>
 
       <Formik
-        onSubmit={() => { }}
+        onSubmit={(form) => { onClose(form) }}
         render={props => <Form {...props} />}
         initialValues={formValues}
         validationSchema={validationSchema}
@@ -69,7 +69,10 @@ function Form(props: FormikProps<Recurso>) {
     handleSubmit,
     handleChange,
     setFieldTouched,
+    values,
+    
   } = props;
+
 
   const onChange = (name: keyof Recurso, e: React.ChangeEvent) => {
     e.persist();
@@ -85,7 +88,7 @@ function Form(props: FormikProps<Recurso>) {
       <form style={{ padding: 20 }} className="" onSubmit={handleSubmit}>
 
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12}>
             <TextField
               required
               helperText={touched.codigo ? errors.codigo : ''}
@@ -95,10 +98,12 @@ function Form(props: FormikProps<Recurso>) {
               margin="normal"
               name="codigo"
               fullWidth
+              
+              value={values.codigo}
               label={FieldLabel.CODIGO}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12}>
             <TextField
               required
               margin="normal"
@@ -107,14 +112,16 @@ function Form(props: FormikProps<Recurso>) {
               onChange={e => onChange('descricao', e)}
               name="descricao"
               label={FieldLabel.DESCRICAO}
+              value={values.descricao}
               fullWidth
             />
           </Grid>
-          
+
           <Grid item xs={12}>
             <FormControlLabel
               control={<Checkbox color="secondary" name="isEspacoFisico" value="yes" />}
               label={FieldLabel.ESPACO_FISICO}
+              value={values.isEspacoFisico}
             />
           </Grid>
           <Button type="submit" variant="contained" color="primary" className="">

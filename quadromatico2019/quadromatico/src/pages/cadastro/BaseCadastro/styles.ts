@@ -14,11 +14,22 @@ const useStyles = makeStyles(theme => ({
     height: '40px'
   },
   paperTitle: {
-    margin: '8px 0 0 8px',
+    margin: theme.spacing(1),
   },
   formContainer: {
     padding: '0 0 0 8px',
   },
+  rightIcon: {
+    marginLeft: theme.spacing(1),
+  },
+  buttonNew: {
+    margin: theme.spacing(1),
+    marginLeft: '90%'
+  },
+  root: {
+    flexGrow: 1,
+  },
+ 
 }));
 
 export default useStyles;

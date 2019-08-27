@@ -1,38 +1,70 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './styles';
 import BaseCadastro from '../BaseCadastro';
-import { Button, TextField } from '@material-ui/core';
-import { ButtonLabel } from 'constants/labels';
-import TabelaRecurso from './TabelaRecurso';
+
 import FormRecurso from './FormRecurso';
 import Recurso from 'interfaces/entity/recurso';
-
+import superStyles from '../BaseCadastro/styles';
+import { obterRecursosRequest } from '../../../store/cadastro/recurso/actions';
+import { ApplicationState } from 'store';
+import { useDispatch, useSelector } from 'react-redux';
+import TableMaterial from '../../../components/TableMaterial';
 
 const CadastroRecurso = () => {
   const classes = useStyles();
-
+  const superClasses = superStyles();
+  const dispatch = useDispatch();
 
 
   const [open, setOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedValue, setSelectedValue] = useState<Recurso | undefined>(undefined);
 
 
   function handleClickOpen() {
     setOpen(true);
   }
 
-  const handleClose = (value: string) => {
+  const handleClose = (value: Recurso | undefined) => {
     setOpen(false);
-    setSelectedValue(value);
+    setSelectedValue(undefined);
+    console.log(value);
   };
 
 
+
+  useEffect(() => {
+    dispatch(obterRecursosRequest());
+
+  }, []);
+
+  const recursos = useSelector(
+    ({ recurso: { listaRecursos } }: ApplicationState) => listaRecursos
+  );
+
+  const editClickHandler = (event: any, rowData: Recurso) => {
+    setOpen(true);
+    setSelectedValue(rowData);
+  }
+
+
   return (
-    <BaseCadastro title="Cadastro de recursos">
-      <Button type="submit" variant="contained" onClick={handleClickOpen} className="">
-        {ButtonLabel.NOVO}
-      </Button>
-      <TabelaRecurso ></TabelaRecurso>
+    <BaseCadastro handleClick={handleClickOpen} title="Cadastro de recursos">
+
+      <TableMaterial title='Recursos' data={recursos} columns={[
+        { title: "Código", field: "codigo" },
+        { title: "Descrição", field: "descricao" },
+        {
+          title: "É espaço físico?",
+          field: "isEspacoFisico",
+          render: (rowData: any) => {
+            if (rowData.isEspacoFisico)
+              return <span>S</span>
+            else
+              return <span>N</span>
+          },
+        }
+      ]} editClick={editClickHandler} />
+
       <FormRecurso selectedValue={selectedValue} open={open} onClose={handleClose} />
 
     </BaseCadastro>

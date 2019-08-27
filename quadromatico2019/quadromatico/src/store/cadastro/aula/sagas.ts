@@ -5,21 +5,10 @@ import { obterAulasFailure, obterAulasSuccess } from './actions';
 
 export function* obterAulas() {
     try {
-        //const response = yield call(api.post, '/api/Aulas/getAulas');
-
-        let Aulas: Aula[] = [
-            {
-                id: 1,
-                nome: 'Aula 1'
-            },
-            {
-                id: 2,
-                nome: 'Aula 1'
-            }
-        ];
+        const response = yield call(api.post, '/api/Aulas/getAulas');
 
 
-        yield put(obterAulasSuccess(Aulas));
+        yield put(obterAulasSuccess(response.data));
     } catch (err) {
         yield put(obterAulasFailure());
     }

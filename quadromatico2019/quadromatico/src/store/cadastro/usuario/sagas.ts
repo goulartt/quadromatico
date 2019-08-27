@@ -10,11 +10,11 @@ export function* obterUsuarios() {
         let Usuarios: Usuario[] = [
             {
                 id: 1,
-                nome: 'Usuario 1'
+                login: 'Usuario 1'
             },
             {
                 id: 2,
-                nome: 'Usuario 1'
+                login: 'Usuario 1'
             }
         ];
 

@@ -28,7 +28,7 @@ interface FormAulaProps {
 
 export default function FormAula(props: FormAulaProps) {
   const { onClose, selectedValue, open } = props;
-  const formValues: Aula = {
+  const formValues: {} = {
     nome: ''
   };
 
@@ -59,7 +59,7 @@ export default function FormAula(props: FormAulaProps) {
   );
 }
 
-function Form(props: FormikProps<Aula>) {
+function Form(props: FormikProps<{}>) {
   const {
     errors,
     touched,
@@ -68,12 +68,12 @@ function Form(props: FormikProps<Aula>) {
     setFieldTouched,
   } = props;
 
-  const onChange = (name: keyof Aula, e: React.ChangeEvent) => {
+  const onChange = (name: keyof {}, e: React.ChangeEvent) => {
     e.persist();
     handleChange(e);
   };
 
-  const onBlur = (name: keyof Aula) => {
+  const onBlur = (name: keyof {}) => {
     setFieldTouched(name, true, true);
   };
 
@@ -82,13 +82,13 @@ function Form(props: FormikProps<Aula>) {
       <form style={{ padding: 20 }} className="" onSubmit={handleSubmit}>
 
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12}>
             <TextField
               required
               margin="normal"
-              helperText={touched.nome ? errors.nome : ''}
-              error={touched.nome && !!errors.nome}
-              onChange={e => onChange('nome', e)}
+              //helperText={touched.nome ? errors.nome : ''}
+              //error={touched.nome && !!errors.nome}
+              //onChange={e => onChange('nome', e)}
               name="nome"
               label={FieldLabel.NOME}
               fullWidth

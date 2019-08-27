@@ -19,7 +19,7 @@ const componentes: { [nome: string]: ComponentClass | FunctionComponent } = {
   CadastroTurma,
   CadastroProfessor,
   CadastroAula,
-  CadastroUsuario,
+  CadastroUsuario
 };
 
 const routes: RouteConfig[] = [

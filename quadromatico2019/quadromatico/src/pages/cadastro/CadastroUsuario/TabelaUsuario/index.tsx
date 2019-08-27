@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function TabelaTurma() {
+export default function TabelaUsuario() {
     const dispatch = useDispatch();
 
 
@@ -52,9 +52,9 @@ export default function TabelaTurma() {
         dispatch(obterUsuariosRequest());
 
     }, []);
-    
-    const turmas = useSelector(
-        ({ turma: { listaTurmas } }: ApplicationState) => listaTurmas
+
+    const usuarios = useSelector(
+        ({ usuario: { listaUsuarios } }: ApplicationState) => listaUsuarios
     );
     const classes = useStyles();
 
@@ -64,19 +64,19 @@ export default function TabelaTurma() {
                 <TableHead>
                     <TableRow>
                         <StyledTableCell>Código</StyledTableCell>
-                        <StyledTableCell align="right">Nome</StyledTableCell>
+                        <StyledTableCell align="right">Login</StyledTableCell>
                         <StyledTableCell align="right">Ações</StyledTableCell>
 
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {turmas.map(row => (
+                    {usuarios.map(row => (
                         <StyledTableRow key={row.id}>
                             <StyledTableCell component="th" scope="row">
                                 {row.id}
                             </StyledTableCell>
-                            <StyledTableCell align="right">{row.nome}</StyledTableCell>
-                           
+                            <StyledTableCell align="right">{row.login}</StyledTableCell>
+
                             <StyledTableCell align="right">
                                 <Edit />
                                 <Cancel />
