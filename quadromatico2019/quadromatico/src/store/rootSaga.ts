@@ -6,7 +6,7 @@ import { CursoTypes } from './cadastro/curso/types';
 import { obterCursos } from './cadastro/curso/sagas';
 import { HorarioTypes } from './cadastro/horario/types';
 import { obterHorariosCurso } from './cadastro/horario/sagas';
-import { obterRequests, inativarRecurso } from './cadastro/recurso/sagas';
+import { obterRequests, inativarRecurso, adicionarRecurso } from './cadastro/recurso/sagas';
 import { obterDisciplinas } from './cadastro/disciplina/sagas';
 import { obterTurmas } from './cadastro/turma/sagas';
 import { obterProfessores } from './cadastro/professor/sagas';
@@ -33,8 +33,5 @@ export default function* rootSaga() {
     takeLatest(ProfessorTypes.OBTER_REQUEST, obterProfessores),
     takeLatest(AulaTypes.OBTER_REQUEST, obterAulas),
     takeLatest(UsuarioTypes.OBTER_REQUEST, obterUsuarios),
-
-    takeLatest(RecursoTypes.INATIVAR, inativarRecurso),
-
   ]);
 }

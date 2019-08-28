@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Recurso from 'interfaces/entity/recurso';
 import { FieldLabel, ButtonLabel } from 'constants/labels';
 import { ErrorMessage } from 'constants/messages';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -22,14 +21,15 @@ const useStyles = makeStyles({
 
 interface FormProfessorProps {
   open: boolean;
-  selectedValue: string;
-  onClose: (value: string) => void;
+  selectedValue: Professor | undefined;
+  onClose: (value: Professor | undefined) => void;
 }
 
 export default function FormProfessor(props: FormProfessorProps) {
   const { onClose, selectedValue, open } = props;
   const formValues: Professor = {
-    nome: ''
+    id: selectedValue ? selectedValue.id : undefined,
+    nome: selectedValue ? selectedValue.nome : '',
   };
 
   const validationSchema = yup.object({
@@ -40,16 +40,16 @@ export default function FormProfessor(props: FormProfessorProps) {
     onClose(selectedValue);
   }
 
-  function handleListItemClick(value: string) {
+  function handleListItemClick(value: Professor) {
     onClose(value);
   }
 
   return (
     <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-      <DialogTitle id="simple-dialog-title">Formulário de Professors</DialogTitle>
+      <DialogTitle id="simple-dialog-title">Formulário de Professores</DialogTitle>
 
       <Formik
-        onSubmit={() => { }}
+        onSubmit={(form) => { onClose(form) }}
         render={props => <Form {...props} />}
         initialValues={formValues}
         validationSchema={validationSchema}
@@ -66,6 +66,7 @@ function Form(props: FormikProps<Professor>) {
     handleSubmit,
     handleChange,
     setFieldTouched,
+    values
   } = props;
 
   const onChange = (name: keyof Professor, e: React.ChangeEvent) => {
@@ -82,6 +83,21 @@ function Form(props: FormikProps<Professor>) {
       <form style={{ padding: 20 }} className="" onSubmit={handleSubmit}>
 
         <Grid container spacing={3}>
+        <Grid item xs={12} sm={12}>
+            <TextField
+              required
+              helperText={touched.id ? errors.id : ''}
+              error={touched.id && !!errors.id}
+              onChange={e => onChange('id', e)}
+              onBlur={() => onBlur('id')}
+              margin="normal"
+              name="id"
+              fullWidth
+              
+              value={values.id}
+              label={FieldLabel.CODIGO}
+            />
+          </Grid>
           <Grid item xs={12} sm={12}>
             <TextField
               required
@@ -91,6 +107,8 @@ function Form(props: FormikProps<Professor>) {
               onChange={e => onChange('nome', e)}
               name="nome"
               label={FieldLabel.NOME}
+              value={values.nome}
+
               fullWidth
             />
           </Grid>

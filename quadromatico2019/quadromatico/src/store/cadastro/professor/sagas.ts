@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import Professor from '../../../interfaces/entity/professor';
 import api from 'services/api';
-import { obterProfessoresFailure, obterProfessoresSuccess } from './actions';
+import { obterProfessoresFailure, obterProfessoresSuccess, deletarProfessor, criarProfessor } from './actions';
 
 export function* obterProfessores() {
     try {
@@ -23,4 +23,14 @@ export function* obterProfessores() {
     } catch (err) {
         yield put(obterProfessoresFailure());
     }
+}
+
+export function* inativarProfessor(professor: Professor) {
+    yield put(deletarProfessor(professor));
+}
+
+export function* adicionarProfessor(professor: Professor) {
+
+        yield put(criarProfessor(professor));
+    
 }

@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import Recurso from '../../../interfaces/entity/recurso';
 import api from 'services/api';
-import { obterRecursosFailure, obterRecursosSuccess } from './actions';
+import { obterRecursosFailure, obterRecursosSuccess, criarRecurso, deletarRecurso } from './actions';
 
 export function* obterRequests() {
     try {
@@ -29,6 +29,12 @@ export function* obterRequests() {
     }
 }
 
-export function* inativarRecurso() {
-    yield console.log('To DO');
+export function* inativarRecurso(recurso: Recurso) {
+    yield put(deletarRecurso(recurso));
+}
+
+export function* adicionarRecurso(recurso: Recurso) {
+
+        yield put(criarRecurso(recurso));
+    
 }

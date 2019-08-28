@@ -22,14 +22,15 @@ const useStyles = makeStyles({
 
 interface FormDisciplinaProps {
   open: boolean;
-  selectedValue: string;
-  onClose: (value: string) => void;
+  selectedValue: Disciplina | undefined;
+  onClose: (value: Disciplina | undefined) => void;
 }
 
 export default function FormDisciplina(props: FormDisciplinaProps) {
   const { onClose, selectedValue, open } = props;
   const formValues: Disciplina = {
-    nome: ''
+    id: selectedValue ? selectedValue.id : undefined,
+    nome: selectedValue ? selectedValue.nome : '',
   };
 
   const validationSchema = yup.object({
@@ -40,7 +41,7 @@ export default function FormDisciplina(props: FormDisciplinaProps) {
     onClose(selectedValue);
   }
 
-  function handleListItemClick(value: string) {
+  function handleListItemClick(value: Disciplina) {
     onClose(value);
   }
 
@@ -49,7 +50,7 @@ export default function FormDisciplina(props: FormDisciplinaProps) {
       <DialogTitle id="simple-dialog-title">Formulário de Disciplinas</DialogTitle>
 
       <Formik
-        onSubmit={() => { }}
+        onSubmit={(form) => { onClose(form) }}
         render={props => <Form {...props} />}
         initialValues={formValues}
         validationSchema={validationSchema}
@@ -66,6 +67,7 @@ function Form(props: FormikProps<Disciplina>) {
     handleSubmit,
     handleChange,
     setFieldTouched,
+    values
   } = props;
 
   const onChange = (name: keyof Disciplina, e: React.ChangeEvent) => {
@@ -85,12 +87,29 @@ function Form(props: FormikProps<Disciplina>) {
           <Grid item xs={12} sm={12}>
             <TextField
               required
+              helperText={touched.id ? errors.id : ''}
+              error={touched.id && !!errors.id}
+              onChange={e => onChange('id', e)}
+              onBlur={() => onBlur('id')}
+              margin="normal"
+              name="id"
+              fullWidth
+
+              value={values.id}
+              label={FieldLabel.CODIGO}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <TextField
+              required
               margin="normal"
               helperText={touched.nome ? errors.nome : ''}
               error={touched.nome && !!errors.nome}
               onChange={e => onChange('nome', e)}
               name="nome"
               label={FieldLabel.NOME}
+              value={values.nome}
+
               fullWidth
             />
           </Grid>

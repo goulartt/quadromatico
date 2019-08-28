@@ -5,7 +5,7 @@ import BaseCadastro from '../BaseCadastro';
 import FormRecurso from './FormRecurso';
 import Recurso from 'interfaces/entity/recurso';
 import superStyles from '../BaseCadastro/styles';
-import { obterRecursosRequest } from '../../../store/cadastro/recurso/actions';
+import { obterRecursosRequest, criarRecurso, deletarRecurso } from '../../../store/cadastro/recurso/actions';
 import { ApplicationState } from 'store';
 import { useDispatch, useSelector } from 'react-redux';
 import TableMaterial from '../../../components/TableMaterial';
@@ -19,7 +19,6 @@ const CadastroRecurso = () => {
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState<Recurso | undefined>(undefined);
 
-
   function handleClickOpen() {
     setOpen(true);
   }
@@ -27,9 +26,14 @@ const CadastroRecurso = () => {
   const handleClose = (value: Recurso | undefined) => {
     setOpen(false);
     setSelectedValue(undefined);
-    console.log(value);
+    if(value) {
+      dispatch(criarRecurso(value));
+    }
   };
 
+  const recursos = useSelector(
+    ({ recurso: { listaRecursos } }: ApplicationState) => listaRecursos
+  );
 
 
   useEffect(() => {
@@ -37,10 +41,7 @@ const CadastroRecurso = () => {
 
   }, []);
 
-  const recursos = useSelector(
-    ({ recurso: { listaRecursos } }: ApplicationState) => listaRecursos
-  );
-
+  
   const editClickHandler = (event: any, rowData: Recurso) => {
     setOpen(true);
     setSelectedValue(rowData);
@@ -63,7 +64,7 @@ const CadastroRecurso = () => {
               return <span>N</span>
           },
         }
-      ]} editClick={editClickHandler} />
+      ]} editClick={editClickHandler} deleteData={deletarRecurso} />
 
       <FormRecurso selectedValue={selectedValue} open={open} onClose={handleClose} />
 

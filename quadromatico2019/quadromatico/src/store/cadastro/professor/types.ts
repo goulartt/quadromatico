@@ -18,5 +18,5 @@ export enum ProfessorTypes {
 
 export interface ProfessorState extends CadastroState {
   readonly Professor: Professor | {};
-  readonly listaProfessors: Professor[];
+  readonly listaProfessores: Professor[];
 }

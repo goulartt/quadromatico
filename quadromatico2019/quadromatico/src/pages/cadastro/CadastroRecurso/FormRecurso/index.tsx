@@ -119,9 +119,10 @@ function Form(props: FormikProps<Recurso>) {
 
           <Grid item xs={12}>
             <FormControlLabel
-              control={<Checkbox color="secondary" name="isEspacoFisico" value="yes" />}
+              control={<Checkbox color="secondary"  value={values.isEspacoFisico}
+              onChange={e => onChange('isEspacoFisico', e)} name="isEspacoFisico"/>}
               label={FieldLabel.ESPACO_FISICO}
-              value={values.isEspacoFisico}
+            
             />
           </Grid>
           <Button type="submit" variant="contained" color="primary" className="">

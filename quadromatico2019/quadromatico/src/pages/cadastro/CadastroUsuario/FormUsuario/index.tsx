@@ -22,14 +22,16 @@ const useStyles = makeStyles({
 
 interface FormUsuarioProps {
   open: boolean;
-  selectedValue: string;
-  onClose: (value: string) => void;
+  selectedValue: Usuario | undefined;
+  onClose: (value: Usuario | undefined) => void;
 }
 
 export default function FormUsuario(props: FormUsuarioProps) {
   const { onClose, selectedValue, open } = props;
   const formValues: Usuario = {
-    login: '',
+    login: selectedValue ? selectedValue.login : '',
+    id: selectedValue ? selectedValue.id : undefined,
+
   };
 
   const validationSchema = yup.object({
@@ -40,7 +42,7 @@ export default function FormUsuario(props: FormUsuarioProps) {
     onClose(selectedValue);
   }
 
-  function handleListItemClick(value: string) {
+  function handleListItemClick(value: Usuario) {
     onClose(value);
   }
 
@@ -49,7 +51,7 @@ export default function FormUsuario(props: FormUsuarioProps) {
       <DialogTitle id="simple-dialog-title">Formulário de Usuários</DialogTitle>
 
       <Formik
-        onSubmit={() => { }}
+        onSubmit={(form) => { onClose(form) }}
         render={props => <Form {...props} />}
         initialValues={formValues}
         validationSchema={validationSchema}
@@ -66,6 +68,7 @@ function Form(props: FormikProps<Usuario>) {
     handleSubmit,
     handleChange,
     setFieldTouched,
+    values
   } = props;
 
   const onChange = (name: keyof Usuario, e: React.ChangeEvent) => {
@@ -85,6 +88,21 @@ function Form(props: FormikProps<Usuario>) {
           <Grid item xs={12} sm={12}>
             <TextField
               required
+              helperText={touched.id ? errors.id : ''}
+              error={touched.id && !!errors.id}
+              onChange={e => onChange('id', e)}
+              onBlur={() => onBlur('id')}
+              margin="normal"
+              name="id"
+              fullWidth
+
+              value={values.id}
+              label={FieldLabel.CODIGO}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <TextField
+              required
               margin="normal"
               helperText={touched.login ? errors.login : ''}
               error={touched.login && !!errors.login}
@@ -92,6 +110,7 @@ function Form(props: FormikProps<Usuario>) {
               name="login"
               label={FieldLabel.NOME}
               fullWidth
+              value={values.login}
             />
           </Grid>
 

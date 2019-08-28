@@ -25,9 +25,10 @@ type TableMaterialProps = {
   data: any[],
   title: string,
   editClick: (event: any, rowData: any) => void
+  deleteData: (object: any) => void
 };
 
-export default function TableMaterial({ columns, data, title, editClick }: TableMaterialProps) {
+export default function TableMaterial({ columns, data, title, editClick, deleteData }: TableMaterialProps) {
 
   const icons: Icons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -95,12 +96,8 @@ export default function TableMaterial({ columns, data, title, editClick }: Table
         
         onRowDelete: oldData =>
           new Promise(resolve => {
-            setTimeout(() => {
-              resolve();
-              const data = [...state.data];
-              data.splice(data.indexOf(oldData), 1);
-              setState({ ...state, data });
-            }, 600);
+            resolve();
+            dispatch(deleteData(oldData));
           }),
       }}
       actions={[

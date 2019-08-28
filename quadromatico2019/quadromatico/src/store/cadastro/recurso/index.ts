@@ -1,5 +1,6 @@
 import { Reducer } from 'redux';
 import { RecursoState, RecursoTypes } from './types';
+import { ListAltRounded } from '@material-ui/icons';
 
 const INITIAL_STATE: RecursoState = {
   recurso: {},
@@ -10,7 +11,17 @@ const INITIAL_STATE: RecursoState = {
 const reducer: Reducer<RecursoState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case RecursoTypes.CRIAR:
-      return { ...state, modo: 'create' };
+      return {
+        ...state,
+        modo: 'create',
+        listaRecursos: state.listaRecursos
+          .filter(r => r.codigo === action.payload.recurso.codigo).length === 0 ?
+          [...state.listaRecursos, action.payload.recurso] :
+          state.listaRecursos.map(item => {
+            return item.codigo == action.payload.recurso.codigo ?
+              action.payload.recurso : item
+          })
+      };
     case RecursoTypes.CANCELAR_CADASTRO:
       return { ...state, modo: 'list' };
     case RecursoTypes.OBTER_REQUEST:
@@ -27,12 +38,13 @@ const reducer: Reducer<RecursoState> = (state = INITIAL_STATE, action) => {
         modo: 'list'
       };
 
-    case RecursoTypes.INATIVAR: 
-  
+    case RecursoTypes.INATIVAR:
       return {
         ...state,
-        modo: 'list'
-
+        modo: 'list',
+        listaRecursos: [...state.listaRecursos].filter((value, index, arr) => {
+          return value.codigo != action.payload.recurso.codigo;
+        })
       };
     case RecursoTypes.CANCELAR_EDICAO:
       return { ...state, modo: 'list' };

@@ -16,7 +16,6 @@ const reducer: Reducer<AulaState> = (state = INITIAL_STATE, action) => {
     case AulaTypes.OBTER_REQUEST:
       return { ...state, modo: 'list' };
     case AulaTypes.OBTER_SUCCESS:
-      console.log(action.payload)
       return {
         ...state,
         listaAulas: action.payload,
