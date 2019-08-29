@@ -71,7 +71,7 @@ export default function TableMaterial({ columns, data, title, editClick, deleteD
           addTooltip: 'Adicionar',
           emptyDataSourceMessage: 'Sem registros.',
           filterRow: {
-              filterTooltip: 'Filtro'
+            filterTooltip: 'Filtro'
           },
           deleteTooltip: 'Deletar',
           editTooltip: 'Editar',
@@ -88,12 +88,11 @@ export default function TableMaterial({ columns, data, title, editClick, deleteD
           labelDisplayedRows: '{from}-{to} de {count}',
           labelRowsSelect: 'linhas'
         },
-       
-      }}
 
+      }}
       data={data}
       editable={{
-        
+
         onRowDelete: oldData =>
           new Promise(resolve => {
             resolve();
@@ -107,8 +106,13 @@ export default function TableMaterial({ columns, data, title, editClick, deleteD
           onClick: editClick
         }
       ]}
+
       options={{
-        actionsColumnIndex: -1
+        actionsColumnIndex: -1,
+        headerStyle: {
+          backgroundColor: '#ff9522',
+          color: '#FFF'
+        }
       }}
     />
   );

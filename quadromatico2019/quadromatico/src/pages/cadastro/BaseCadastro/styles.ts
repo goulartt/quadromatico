@@ -24,12 +24,12 @@ const useStyles = makeStyles(theme => ({
   },
   buttonNew: {
     margin: theme.spacing(1),
-    marginLeft: '90%'
+    marginLeft: '90%',
   },
   root: {
     flexGrow: 1,
   },
- 
+
 }));
 
 export default useStyles;

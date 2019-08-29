@@ -27,7 +27,7 @@ const BaseCadastro: FunctionComponent<propsBaseCadastro> = props => {
 
         </div>
         <div  >
-          <Button type="submit" variant="contained" onClick={props.handleClick} className={classes.buttonNew}>
+          <Button type="submit" color="primary" variant="contained" onClick={props.handleClick} className={classes.buttonNew}>
             {ButtonLabel.NOVO}
             <Add className={classes.rightIcon}></Add>
           </Button>

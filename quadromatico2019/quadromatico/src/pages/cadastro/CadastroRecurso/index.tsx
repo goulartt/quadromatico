@@ -41,7 +41,7 @@ const CadastroRecurso = () => {
 
   }, []);
 
-  
+
   const editClickHandler = (event: any, rowData: Recurso) => {
     setOpen(true);
     setSelectedValue(rowData);
@@ -64,6 +64,7 @@ const CadastroRecurso = () => {
               return <span>N</span>
           },
         }
+
       ]} editClick={editClickHandler} deleteData={deletarRecurso} />
 
       <FormRecurso selectedValue={selectedValue} open={open} onClose={handleClose} />
