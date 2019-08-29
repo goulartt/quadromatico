@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Recurso from 'interfaces/entity/recurso';
 import { FieldLabel, ButtonLabel } from 'constants/labels';
 import { ErrorMessage } from 'constants/messages';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -11,7 +10,10 @@ import * as yup from 'yup';
 import { TextField, Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Disciplina from 'interfaces/entity/disciplina';
+import Turma from 'interfaces/entity/turma';
+import Curso from 'interfaces/entity/curso';
+import Horario from 'interfaces/entity/horario';
+import Grupo from 'interfaces/entity/grupo';
 
 const useStyles = makeStyles({
   avatar: {
@@ -20,16 +22,20 @@ const useStyles = makeStyles({
   },
 });
 
-interface FormDisciplinaProps {
+interface FormTurmaProps {
   open: boolean;
-  selectedValue: string;
-  onClose: (value: string) => void;
+  selectedValue: Turma | undefined;
+  onClose: (value: Turma | undefined) => void;
 }
 
-export default function FormDisciplina(props: FormDisciplinaProps) {
+export default function FormDisciplina(props: FormTurmaProps) {
   const { onClose, selectedValue, open } = props;
-  const formValues: Disciplina = {
-    nome: ''
+  const formValues: Turma = {
+    codigo: selectedValue ? selectedValue.codigo : '',
+    periodo:  selectedValue ? selectedValue.periodo : 0,
+    curso: selectedValue ? selectedValue.curso : {} as Curso ,
+    grupos: selectedValue ? selectedValue.grupos : [] as Grupo[],
+    horario: selectedValue ? selectedValue.horario : {} as Horario,
   };
 
   const validationSchema = yup.object({
@@ -40,16 +46,16 @@ export default function FormDisciplina(props: FormDisciplinaProps) {
     onClose(selectedValue);
   }
 
-  function handleListItemClick(value: string) {
+  function handleListItemClick(value: Turma) {
     onClose(value);
   }
 
   return (
     <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-      <DialogTitle id="simple-dialog-title">Formulário de Disciplinas</DialogTitle>
+      <DialogTitle id="simple-dialog-title">Formulário de Turmas</DialogTitle>
 
       <Formik
-        onSubmit={() => { }}
+        onSubmit={(form) => { onClose(form) }}
         render={props => <Form {...props} />}
         initialValues={formValues}
         validationSchema={validationSchema}
@@ -59,21 +65,22 @@ export default function FormDisciplina(props: FormDisciplinaProps) {
   );
 }
 
-function Form(props: FormikProps<Disciplina>) {
+function Form(props: FormikProps<Turma>) {
   const {
     errors,
     touched,
     handleSubmit,
     handleChange,
     setFieldTouched,
+    values
   } = props;
 
-  const onChange = (name: keyof Disciplina, e: React.ChangeEvent) => {
+  const onChange = (name: keyof Turma, e: React.ChangeEvent) => {
     e.persist();
     handleChange(e);
   };
 
-  const onBlur = (name: keyof Disciplina) => {
+  const onBlur = (name: keyof Turma) => {
     setFieldTouched(name, true, true);
   };
 
@@ -86,11 +93,11 @@ function Form(props: FormikProps<Disciplina>) {
             <TextField
               required
               margin="normal"
-              helperText={touched.nome ? errors.nome : ''}
-              error={touched.nome && !!errors.nome}
-              onChange={e => onChange('nome', e)}
-              name="nome"
-              label={FieldLabel.NOME}
+              helperText={touched.codigo ? errors.codigo : ''}
+              error={touched.codigo && !!errors.codigo}
+              onChange={e => onChange('codigo', e)}
+              name="codigo"
+              label={FieldLabel.CODIGO}
               fullWidth
             />
           </Grid>

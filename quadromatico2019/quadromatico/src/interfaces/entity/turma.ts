@@ -5,7 +5,7 @@ import Grupo from './grupo';
 
 export default interface Turma extends Entidade {
   codigo: string;
-  curso: Curso;
+  curso: Curso ;
   horario: Horario;
   periodo: number;
   grupos: Grupo[];
