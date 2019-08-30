@@ -6,6 +6,7 @@ import CadastroTurma from 'pages/cadastro/CadastroTurma';
 import CadastroProfessor from 'pages/cadastro/CadastroProfessor';
 import CadastroAula from 'pages/cadastro/CadastroAula';
 import CadastroUsuario from 'pages/cadastro/CadastroUsuario';
+import CadastroCurso from 'pages/cadastro/CadastroCurso';
 
 import Private from './private';
 
@@ -19,7 +20,8 @@ const componentes: { [nome: string]: ComponentClass | FunctionComponent } = {
   CadastroTurma,
   CadastroProfessor,
   CadastroAula,
-  CadastroUsuario
+  CadastroUsuario,
+  CadastroCurso
 };
 
 const routes: RouteConfig[] = [
@@ -41,7 +43,7 @@ const routes: RouteConfig[] = [
     title: 'Curso',
     parentId: 2,
     path: '/curso',
-    componentType: 'Calendario',
+    componentType: 'CadastroCurso',
   },
   {
     id: 4,

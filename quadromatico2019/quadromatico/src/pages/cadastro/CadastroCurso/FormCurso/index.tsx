@@ -10,10 +10,9 @@ import { blue } from '@material-ui/core/colors';
 import * as yup from 'yup';
 import { TextField, Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import Aula from 'interfaces/entity/aula';
 import Curso from 'interfaces/entity/curso';
 import Disciplina from 'interfaces/entity/disciplina';
-import Grupo from 'interfaces/entity/grupo';
+import Turma from 'interfaces/entity/turma';
 
 const useStyles = makeStyles({
   avatar: {
@@ -22,22 +21,19 @@ const useStyles = makeStyles({
   },
 });
 
-interface FormAulaProps {
+interface FormCursoProps {
   open: boolean;
-  selectedValue: Aula | undefined;
-  onClose: (value: Aula | undefined) => void;
+  selectedValue: Curso | undefined;
+  onClose: (value: Curso | undefined) => void;
 }
 
-export default function FormAula(props: FormAulaProps) {
+export default function FormCurso(props: FormCursoProps) {
   const { onClose, selectedValue, open } = props;
-  const formValues: Aula = {
-    curso: selectedValue ? selectedValue.curso : [] as Curso[],
-    dataHoraInicioAula: selectedValue ? selectedValue.dataHoraInicioAula : new Date(),
-    dataHoraTerminoAula: selectedValue ? selectedValue.dataHoraTerminoAula :  new Date(),
-    disciplina: selectedValue ? selectedValue.disciplina : [] as Disciplina[],
-    grupo: selectedValue ? selectedValue.grupo : [] as Grupo[],
-    horaInicioAula: selectedValue ? selectedValue.horaInicioAula : '',
-    horaTerminoAula:  selectedValue ? selectedValue.horaTerminoAula : '',
+  const formValues: Curso = {
+    turmas: selectedValue ? selectedValue.turmas : [] as Turma[],
+    disciplinas: selectedValue ? selectedValue.disciplinas : [] as Disciplina[],
+    qtdePeriodos: selectedValue ? selectedValue.qtdePeriodos : 0,
+    nome: selectedValue ? selectedValue.nome : '',
     id:  selectedValue ? selectedValue.id : undefined
   };
 
@@ -49,13 +45,13 @@ export default function FormAula(props: FormAulaProps) {
     onClose(selectedValue);
   }
 
-  function handleListItemClick(value: Aula) {
+  function handleListItemClick(value: Curso) {
     onClose(value);
   }
 
   return (
     <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-      <DialogTitle id="simple-dialog-title">Formulário de Aulas</DialogTitle>
+      <DialogTitle id="simple-dialog-title">Formulário de Cursos</DialogTitle>
 
       <Formik
         onSubmit={(form) => { onClose(form) }}
@@ -68,7 +64,7 @@ export default function FormAula(props: FormAulaProps) {
   );
 }
 
-function Form(props: FormikProps<Aula>) {
+function Form(props: FormikProps<Curso>) {
   const {
     errors,
     touched,
@@ -78,12 +74,12 @@ function Form(props: FormikProps<Aula>) {
     values
   } = props;
 
-  const onChange = (name: keyof Aula, e: React.ChangeEvent) => {
+  const onChange = (name: keyof Curso, e: React.ChangeEvent) => {
     e.persist();
     handleChange(e);
   };
 
-  const onBlur = (name: keyof Aula) => {
+  const onBlur = (name: keyof Curso) => {
     setFieldTouched(name, true, true);
   };
 
@@ -96,13 +92,13 @@ function Form(props: FormikProps<Aula>) {
             <TextField
               required
               margin="normal"
-              helperText={touched.horaInicioAula ? errors.horaInicioAula : ''}
-              error={touched.horaInicioAula && !!errors.horaInicioAula}
-              onChange={e => onChange('horaInicioAula', e)}
-              name="horaInicioAula"
-              label="Hora Inicio"
+              helperText={touched.qtdePeriodos ? errors.qtdePeriodos : ''}
+              error={touched.qtdePeriodos && !!errors.qtdePeriodos}
+              onChange={e => onChange('qtdePeriodos', e)}
+              name="qtdePeriodos"
+              label="Quantidade de Períodos"
               fullWidth
-              value={values.horaInicioAula}
+              value={values.qtdePeriodos}
             />
           </Grid>
 
