@@ -8,3 +8,5 @@ export const obterCursosSuccess = (cursos: Curso[]) =>
   action(CursoTypes.OBTER_CURSOS_SUCCESS, { cursos });
 
 export const obterCursosFailure = () => action(CursoTypes.OBTER_CURSOS_FAILURE);
+export const criarCurso = (curso: Curso) => action(CursoTypes.CRIAR, { curso });
+export const deletarCurso = (curso: Curso) => action(CursoTypes.DELETAR, { curso });
